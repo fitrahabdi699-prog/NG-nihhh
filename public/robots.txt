@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nontongratis.vercel.app/sitemap.xml
