@@ -232,12 +232,12 @@ body::before {
 /* ===== HERO ===== */
 .hero {
   position: relative;
-  height: 100vh;
-  min-height: 600px;
+  min-height: 80vh; /* Menggunakan min-height agar lebih fleksibel */
   max-height: 860px;
   overflow: hidden;
   display: flex;
   align-items: flex-end;
+  padding-top: 80px; /* Memberi ruang agar tidak mentok ke navbar */
 }
 .hero-bg {
   position: absolute; inset: 0;
@@ -1090,12 +1090,30 @@ body::before {
   .logo { font-size: 17px; }
   .logo-mark { width: 28px; height: 28px; }
   .user-avatar { width: 32px; height: 32px; font-size: 11px; }
-
-  .hero { max-height: 480px; min-height: 380px; }
-  .hero-content { padding: 0 20px 72px; max-width: 100%; }
-  .hero-title { font-size: 24px; letter-spacing: -0.8px; }
-  .hero-desc { font-size: 13px; -webkit-line-clamp: 2; }
-  .hero-meta { font-size: 12px; gap: 10px; }
+  .hero { 
+    max-height: 520px; 
+    min-height: 420px; 
+    height: auto; /* Membebaskan tinggi kaku vh */
+  }
+  .hero-content { 
+    padding: 0 20px 40px; /* Kurangi padding bawah agar konten naik dan pas */
+    max-width: 100%; 
+  }
+  .hero-title { 
+    font-size: 24px; 
+    letter-spacing: -0.8px; 
+    margin-bottom: 8px; /* Dipersempit sedikit jaraknya */
+  }
+  .hero-desc { 
+    font-size: 13px; 
+    -webkit-line-clamp: 2; 
+    margin-bottom: 12px; 
+  }
+  .hero-meta { 
+    font-size: 12px; 
+    gap: 10px; 
+    margin-bottom: 20px; /* Mengurangi jarak kosong */
+  }
   .btn-play { padding: 11px 20px; font-size: 13px; }
   .btn-info { padding: 11px 16px; font-size: 13px; }
   .hero-right { right: 16px; bottom: 28px; }
