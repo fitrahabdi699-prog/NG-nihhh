@@ -1137,7 +1137,6 @@ body::before {
     gap: 12px !important; /* Memberikan jarak otomatis antar elemen (topbar, video, source-bar) */
     box-sizing: border-box !important;
   }
-
   /* Buat rasio video jadi landscape proporsional (16:9) */
   .player-frame-wrap {
     width: 100% !important;
@@ -1145,12 +1144,33 @@ body::before {
     aspect-ratio: 16 / 9 !important;
     flex: none !important; /* Matikan flex grow biar ga meluber */
   }
-
   /* Posisikan tombol switcher source-bar pas nempel di bawah video */
   .source-bar {
     width: 100% !important;
     margin-top: 0 !important;
     border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  /* Membuat header halaman responsif menggunakan flexbox */
+  .page-header { 
+    padding: 82px 18px 22px; 
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  /* Mengamankan judul agar tidak mendesak input search */
+  .page-title { 
+    font-size: 22px !important; 
+    white-space: nowrap !important;
+  }
+  /* Memperbaiki container search dan input agar ukurannya fleksibel di HP */
+  .search-wrap {
+    flex: 1 !important; /* Membuat search bar otomatis membesar mengambil sisa ruang kosong */
+    max-width: 240px !important; /* Membatasi lebar maksimal agar tidak terlalu lebar */
+  }
+  .search-wrap input { 
+    width: 100% !important; /* Mengikuti lebar bungkusnya (.search-wrap) */
   }
 }
 
