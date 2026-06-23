@@ -1,0 +1,12 @@
+{
+  "name": "ng-nonton",
+  "version": "1.0.0",
+  "description": "NG Nonton Gratis Film & Series - by Setya Adi Hutama",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "author": "Setya Adi Hutama",
+  "license": "MIT"
+}
