@@ -1128,10 +1128,14 @@ body::before {
      INI YANG DIGANTI/DITAMBAHKAN BIAR PLAYER PAS DI HP
      ==================================================== */
   
-  /* Maksa bungkus player modal biar muat satu layar hp pas */
+    /* Maksa bungkus player modal biar muat satu layar hp pas */
   .player-wrap {
     height: 100dvh !important;
-    justify-content: space-between;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* Mengubah posisi ke tengah layar */
+    gap: 12px !important; /* Memberikan jarak otomatis antar elemen (topbar, video, source-bar) */
+    box-sizing: border-box !important;
   }
 
   /* Buat rasio video jadi landscape proporsional (16:9) */
