@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="FbBEKidNPeJPrWv1fRRTOBIZ99zGD06c2kxZs2rSEEM" />
+  <title>NG Nonton — Streaming Film & Series</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/logo.png">
+  <link rel="shortcut icon" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <!-- SEO -->
+  <link rel="canonical" href="https://nontongratis.vercel.app/">
+  <meta name="description" content="NG Nonton - Streaming Film dan Series online dengan tampilan modern dan mudah digunakan.">
+  <meta name="keywords" content="NG Nonton, Nonton Gratis, Film Online, Series Online, Streaming Film, Streaming Series">
+  <meta name="author" content="NG Nonton">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <!-- Open Graph -->
+  <meta property="og:title" content="NG Nonton — Streaming Film & Series">
+  <meta property="og:description" content="Streaming Film dan Series online dengan tampilan modern dan mudah digunakan.">
+  <meta property="og:image" content="https://nontongratis.vercel.app/logo.png">
+  <meta property="og:url" content="https://nontongratis.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NG Nonton">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NG Nonton — Streaming Film & Series">
+  <meta name="twitter:description" content="Streaming Film dan Series online dengan tampilan modern dan mudah digunakan.">
+  <meta name="twitter:image" content="https://nontongratis.vercel.app/logo.png">
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"NG Nonton",
+    "url":"https://nontongratis.vercel.app/",
+    "image":"https://nontongratis.vercel.app/logo.png"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="#" onclick="showHome()">
+        <span class="logo-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </span>
+<span class="logo-ng">NG</span>
+<span class="logo-nonton">FILM & SERIES</span>
+      </a>
+      <div class="nav-links">
+        <a href="#" onclick="showHome()" class="nav-link active" id="navHome">Beranda</a>
+        <a href="#" onclick="showCategory('movie')" class="nav-link" id="navMovies">Film</a>
+        <a href="#" onclick="showCategory('tv')" class="nav-link" id="navSeries">Series</a>
+        <a href="#" onclick="showWatchlist()" class="nav-link" id="navWatchlist">Watchlist</a>
+      </div>
+      <div class="nav-right">
+        <div class="search-wrap">
+          <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="searchInput" placeholder="Cari film atau series..." onkeyup="handleSearch(event)" />
+          <button class="search-btn" onclick="doSearch()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <div class="user-avatar">S</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN APP -->
+  <main id="app">
+
+    <!-- HOME PAGE -->
+    <div id="homePage" class="page active">
+
+      <!-- HERO -->
+      <section class="hero" id="heroSection">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content" id="heroContent">
+          <div class="hero-eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span id="heroBadgeText">Trending Minggu Ini</span>
+          </div>
+          <h1 class="hero-title" id="heroTitle">Memuat...</h1>
+          <p class="hero-desc" id="heroDesc"></p>
+          <div class="hero-meta" id="heroMeta"></div>
+          <div class="hero-actions">
+            <button class="btn-play" id="heroBtnPlay" onclick="watchHero()">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Tonton Sekarang
+            </button>
+            <button class="btn-info" id="heroBtnInfo" onclick="openDetailHero()">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+              Selengkapnya
+            </button>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-indicators" id="heroIndicators"></div>
+        </div>
+      </section>
+
+      <!-- CONTENT ROWS -->
+      <section class="content-section">
+
+        <div class="row-section">
+          <div class="row-header">
+            <div class="row-header-left">
+              <div class="row-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <h2 class="row-title">Film Trending</h2>
+            </div>
+            <a href="#" onclick="showCategory('movie')" class="see-all">Lihat Semua <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+          <div class="cards-slider" id="trendingMovies"><div class="skeleton-row"></div></div>
+        </div>
+
+        <div class="row-section">
+          <div class="row-header">
+            <div class="row-header-left">
+              <div class="row-icon row-icon--blue">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M17 2l-5 5-5-5"/></svg>
+              </div>
+              <h2 class="row-title">Series Populer</h2>
+            </div>
+            <a href="#" onclick="showCategory('tv')" class="see-all">Lihat Semua <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+          <div class="cards-slider" id="popularSeries"><div class="skeleton-row"></div></div>
+        </div>
+
+        <div class="row-section">
+          <div class="row-header">
+            <div class="row-header-left">
+              <div class="row-icon row-icon--gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <h2 class="row-title">Rating Tertinggi</h2>
+            </div>
+            <a href="#" onclick="showCategory('movie')" class="see-all">Lihat Semua <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+          <div class="cards-slider" id="topRated"><div class="skeleton-row"></div></div>
+        </div>
+
+        <div class="row-section">
+          <div class="row-header">
+            <div class="row-header-left">
+              <div class="row-icon row-icon--green">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <h2 class="row-title">Rilis Terbaru</h2>
+            </div>
+            <a href="#" onclick="showCategory('movie')" class="see-all">Lihat Semua <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+          <div class="cards-slider" id="nowPlaying"><div class="skeleton-row"></div></div>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- CATEGORY PAGE -->
+    <div id="categoryPage" class="page">
+      <div class="page-header">
+        <h1 class="page-title" id="categoryTitle">Film</h1>
+        <div class="filter-bar">
+          <div class="filter-select-wrap">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            <select id="genreFilter" onchange="filterCategory()"><option value="">Semua Genre</option></select>
+          </div>
+          <div class="filter-select-wrap">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M7 12h10M11 18h2"/></svg>
+            <select id="sortFilter" onchange="filterCategory()">
+              <option value="popularity.desc">Terpopuler</option>
+              <option value="vote_average.desc">Rating Tertinggi</option>
+              <option value="release_date.desc">Terbaru</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="grid-layout" id="categoryGrid"></div>
+      <div class="pagination" id="categoryPagination"></div>
+    </div>
+
+    <!-- SEARCH PAGE -->
+    <div id="searchPage" class="page">
+      <div class="page-header">
+        <h1 class="page-title">Hasil: "<span id="searchQuery"></span>"</h1>
+      </div>
+      <div class="grid-layout" id="searchGrid"></div>
+    </div>
+
+    <!-- WATCHLIST PAGE -->
+    <div id="watchlistPage" class="page">
+      <div class="page-header">
+        <h1 class="page-title">Watchlist</h1>
+      </div>
+      <div class="grid-layout" id="watchlistGrid"></div>
+      <div class="empty-state" id="watchlistEmpty" style="display:none">
+        <div class="empty-icon-wrap">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>Watchlist masih kosong</h3>
+        <p>Simpan film dan series yang ingin kamu tonton nanti</p>
+        <button onclick="showHome()" class="btn-play" style="margin-top:8px">Jelajahi Konten</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- DETAIL MODAL -->
+  <div id="detailModal" class="modal">
+    <div class="modal-bg" onclick="closeModal()"></div>
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="modal-poster" id="modalPoster"></div>
+      <div class="modal-body">
+        <div class="modal-badges" id="modalBadges"></div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <div class="modal-meta" id="modalMeta"></div>
+        <p class="modal-overview" id="modalOverview"></p>
+        <div class="modal-actions" id="modalActions"></div>
+        <div class="modal-cast" id="modalCast"></div>
+        <div id="episodeSection" style="display:none">
+          <h3 class="section-label">Episode</h3>
+          <div class="season-selector" id="seasonSelector"></div>
+          <div class="episode-list" id="episodeList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYER MODAL -->
+  <div id="playerModal" class="modal player-modal">
+    <div class="player-wrap">
+      <div class="player-topbar">
+        <div class="player-topbar-left">
+          <button class="player-back" onclick="closePlayer()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <span class="player-title" id="playerTitle">Memuat...</span>
+        </div>
+        <button class="player-close" onclick="closePlayer()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="player-frame-wrap">
+        <iframe id="playerFrame" allowfullscreen allow="autoplay; fullscreen" frameborder="0"></iframe>
+        <div class="player-loading" id="playerLoading">
+          <div class="player-loading-content">
+            <div class="loader-ring-wrap">
+              <div class="loader-ring"></div>
+              <div class="loader-ring-2"></div>
+              <div class="loader-dot"></div>
+            </div>
+            <div>
+              <p class="loader-status-text" id="playerLoadingText">Sedang memilih sumber terbaik...</p>
+              <p class="loader-sub-text" id="playerLoadingSubText">Harap tunggu sebentar</p>
+            </div>
+            <div class="loader-source-dots">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- SOURCE SWITCHER BAR -->
+      <div class="source-bar" id="sourceBar">
+        <button class="source-nav-btn" id="sourcePrevBtn" onclick="switchSource(-1)" title="Sumber sebelumnya">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="source-info">
+          <span class="source-label">Sumber</span>
+          <span class="source-name" id="sourceNameEl">—</span>
+          <span class="source-counter" id="sourceCounterEl"></span>
+        </div>
+        <button class="source-nav-btn" id="sourceNextBtn" onclick="switchSource(1)" title="Sumber berikutnya">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <span class="logo-ng">NG</span><span class="logo-nonton">NONTON</span>
+    </div>
+    <p>Data film dari TMDB &middot; Dibuat oleh <strong>Setya Adi Hutama</strong></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
