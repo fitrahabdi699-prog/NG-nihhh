@@ -1025,81 +1025,7 @@ body::before {
 /* Source bar hidden — user never sees it */
 .player-sources { display: none; }
 
-/* ===== LANDSCAPE ROTATE MODE (mobile) ===== */
-/* Wrapper yang di-rotate agar terasa seperti HP miring */
-.player-modal.landscape-mode {
-  /* Biarkan modal tetap di viewport normal */
-}
-
-.player-modal.landscape-mode .player-wrap {
-  /* Rotasi 90deg supaya layar terasa miring landscape */
-  transform: rotate(90deg);
-  transform-origin: center center;
-  width: 100vh;
-  height: 100vw;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50vw;
-  margin-left: -50vh;
-  animation: rotateLandscape 0.35s cubic-bezier(0.34,1.2,0.64,1) forwards;
-}
-
-@keyframes rotateLandscape {
-  from { transform: rotate(0deg); opacity: 0.6; }
-  to   { transform: rotate(90deg); opacity: 1; }
-}
-
-.player-modal.landscape-mode.exiting .player-wrap {
-  animation: rotatePortrait 0.3s ease forwards;
-}
-
-@keyframes rotatePortrait {
-  from { transform: rotate(90deg); }
-  to   { transform: rotate(0deg); opacity: 0; }
-}
-
-/* Tombol toggle rotate — pojok kanan bawah, tidak ganggu nonton */
-.btn-rotate-toggle {
-  position: fixed;
-  bottom: 18px;
-  right: 18px;
-  z-index: 9999;
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  backdrop-filter: blur(12px);
-  transition: all 0.2s;
-  cursor: pointer;
-  opacity: 0.7;
-}
-.btn-rotate-toggle:hover { opacity: 1; background: rgba(124,58,237,0.5); border-color: var(--accent2); }
-.btn-rotate-toggle.active { background: rgba(124,58,237,0.55); border-color: var(--accent2); opacity: 1; box-shadow: 0 0 14px var(--accent-glow); }
-
-/* Tombol toggle source — pojok kiri bawah */
-.btn-source-toggle {
-  position: fixed;
-  bottom: 18px;
-  left: 18px;
-  z-index: 9999;
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  backdrop-filter: blur(12px);
-  transition: all 0.2s;
-  cursor: pointer;
-  opacity: 0.7;
-}
-.btn-source-toggle:hover { opacity: 1; background: rgba(124,58,237,0.5); border-color: var(--accent2); }
-.btn-source-toggle.active { background: rgba(124,58,237,0.55); border-color: var(--accent2); opacity: 1; box-shadow: 0 0 14px var(--accent-glow); }
-
-/* Source bar — awalnya tersembunyi, muncul saat toggle */
+/* ===== SOURCE BAR — tersembunyi default ===== */
 .source-bar.source-hidden {
   transform: translateY(100%);
   opacity: 0;
@@ -1109,19 +1035,25 @@ body::before {
   transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1), opacity 0.3s ease;
 }
 
-/* Di mode landscape, tombol-tombol floating menyesuaikan rotasi */
-.player-modal.landscape-mode .btn-rotate-toggle,
-.player-modal.landscape-mode .btn-source-toggle {
-  /* Tombol tetap di sudut tapi dalam konteks rotasi */
-  transform: rotate(-90deg);
-}
-
-/* Tombol floating selalu di atas player-wrap yang di-rotate */
-.btn-rotate-toggle,
+/* Tombol toggle source — pojok kiri bawah, floating */
 .btn-source-toggle {
-  /* Pastikan tetap di atas segala sesuatu */
-  z-index: 99999 !important;
+  position: fixed;
+  bottom: 18px;
+  left: 18px;
+  z-index: 99999;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(12px);
+  transition: all 0.2s;
+  cursor: pointer;
+  opacity: 0.75;
 }
+.btn-source-toggle:hover { opacity: 1; background: rgba(124,58,237,0.5); border-color: var(--accent2); }
+.btn-source-toggle.active { background: rgba(124,58,237,0.6); border-color: var(--accent2); opacity: 1; box-shadow: 0 0 14px var(--accent-glow); }
 
 /* ===== TOAST ===== */
 .toast {
