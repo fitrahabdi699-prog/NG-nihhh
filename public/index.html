@@ -275,7 +275,7 @@
         </div>
       </div>
       <!-- SOURCE SWITCHER BAR -->
-      <div class="source-bar" id="sourceBar">
+      <div class="source-bar source-hidden" id="sourceBar">
         <button class="source-nav-btn" id="sourcePrevBtn" onclick="switchSource(-1)" title="Sumber sebelumnya">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
@@ -291,6 +291,22 @@
     </div>
   </div>
 
+  <!-- TOMBOL FLOATING: Toggle Source -->
+  <button class="btn-source-toggle" id="btnSourceToggle" onclick="toggleSourceBar()" title="Tampilkan/Sembunyikan Sumber" style="display:none">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/>
+    </svg>
+  </button>
+
+  <!-- TOMBOL FLOATING: Toggle Rotate Landscape -->
+  <button class="btn-rotate-toggle" id="btnRotateToggle" onclick="toggleLandscape()" title="Mode Landscape" style="display:none">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22h6"/>
+      <path d="M12 17v-5M10 14l2-2 2 2"/>
+    </svg>
+  </button>
+
   <!-- TOAST -->
   <div id="toast" class="toast"></div>
 
@@ -303,6 +319,89 @@
   </footer>
 
   <script>
+    /* ===== LANDSCAPE MODE & SOURCE BAR TOGGLE ===== */
+    var _landscapeActive = false;
+
+    function isMobile() {
+      return window.innerWidth <= 900 || ('ontouchstart' in window);
+    }
+
+    function showPlayerFloatBtns(show) {
+      var btnRot = document.getElementById('btnRotateToggle');
+      var btnSrc = document.getElementById('btnSourceToggle');
+      if (btnRot) btnRot.style.display = show ? 'flex' : 'none';
+      if (btnSrc) btnSrc.style.display = show ? 'flex' : 'none';
+    }
+
+    function toggleLandscape() {
+      var modal = document.getElementById('playerModal');
+      var btn = document.getElementById('btnRotateToggle');
+      _landscapeActive = !_landscapeActive;
+
+      if (_landscapeActive) {
+        modal.classList.add('landscape-mode');
+        if (btn) btn.classList.add('active');
+        // Lock ke landscape via Screen Orientation API kalau didukung
+        if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock('landscape').catch(function(){});
+        }
+      } else {
+        modal.classList.add('exiting');
+        if (btn) btn.classList.remove('active');
+        setTimeout(function() {
+          modal.classList.remove('landscape-mode');
+          modal.classList.remove('exiting');
+        }, 320);
+        if (screen.orientation && screen.orientation.unlock) {
+          screen.orientation.unlock();
+        }
+      }
+    }
+
+    function toggleSourceBar() {
+      var bar = document.getElementById('sourceBar');
+      var btn = document.getElementById('btnSourceToggle');
+      if (!bar) return;
+      var isHidden = bar.classList.contains('source-hidden');
+      if (isHidden) {
+        bar.classList.remove('source-hidden');
+        if (btn) btn.classList.add('active');
+        // Auto-sembunyikan setelah 5 detik
+        clearTimeout(window._srcBarTimer);
+        window._srcBarTimer = setTimeout(function() {
+          bar.classList.add('source-hidden');
+          if (btn) btn.classList.remove('active');
+        }, 5000);
+      } else {
+        bar.classList.add('source-hidden');
+        if (btn) btn.classList.remove('active');
+        clearTimeout(window._srcBarTimer);
+      }
+    }
+
+    /* Intercept openPlayer / closePlayer untuk tampilkan/hilangkan tombol float */
+    document.addEventListener('DOMContentLoaded', function() {
+      // Pantau player modal buka/tutup via MutationObserver
+      var playerModal = document.getElementById('playerModal');
+      if (!playerModal) return;
+
+      var observer = new MutationObserver(function() {
+        var isOpen = playerModal.classList.contains('open');
+        // Hanya tampilkan di mobile/touch
+        showPlayerFloatBtns(isOpen && isMobile());
+
+        if (!isOpen && _landscapeActive) {
+          // Reset landscape saat player ditutup
+          _landscapeActive = false;
+          playerModal.classList.remove('landscape-mode');
+          playerModal.classList.remove('exiting');
+          document.getElementById('btnRotateToggle') && document.getElementById('btnRotateToggle').classList.remove('active');
+          if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+        }
+      });
+      observer.observe(playerModal, { attributes: true, attributeFilter: ['class'] });
+    });
+
     function toggleMobileSearch(){
       var navInner = document.querySelector('.nav-inner');
       var icon = document.getElementById('mobileSearchIcon');
